@@ -1,3 +1,4 @@
+let selectedDayNumber = null;
 
 function showCorrectScreen() {
     const beforeStartScreen = document.querySelector(".screen-before-start");
@@ -44,21 +45,48 @@ function updateCountdown() {
         String(seconds).padStart(2, "0");
 }
 
+
 function markCurrentCalendarDay() {
-    const currentDay = getCurrentCalendarDay();
+    const calendarDays = document.querySelectorAll(".calendar-day");
+    const today = getCurrentCalendarDay() || 0;
 
-    document.querySelectorAll(".calendar-day").forEach(day => {
-        day.classList.remove("is-today");
+    calendarDays.forEach((dayElement) => {
+        const dayNumber = Number(dayElement.dataset.day);
+
+        dayElement.classList.remove(
+            "is-available",
+            "is-locked",
+            "is-today",
+            "is-scanned",
+            "is-completed"
+        );
+
+        if (dayNumber === today) {
+            dayElement.classList.add("is-today");
+        }
+
+        // Día 25: regalo especial, disponible tras completar el 24.
+        if (dayNumber === 25) {
+            if (getEstadoDia() === "24C" && today >= 25) {
+                dayElement.classList.add("is-available");
+            } else {
+                dayElement.classList.add("is-locked");
+            }
+            return;
+        }
+
+        if (isDiaCompletado(dayNumber)) {
+            dayElement.classList.add("is-completed");
+        } else if (isDiaEscaneado(dayNumber)) {
+            dayElement.classList.add("is-scanned");
+        } else if (canOpenDay(dayNumber) && today >= dayNumber) {
+            dayElement.classList.add("is-available");
+        } else {
+            dayElement.classList.add("is-locked");
+        }
     });
-
-    const todayElement = document.querySelector(
-        `.calendar-day[data-day="${currentDay}"]`
-    );
-
-    if (todayElement && currentDay >= 1 && currentDay <= 25) {
-        todayElement.classList.add("is-today");
-    }
 }
+
 
 
 
@@ -71,6 +99,14 @@ function openDay(dayNumber) {
         console.error("No se ha encontrado la pantalla del día.");
         return;
     }
+
+    if (!canOpenDay(dayNumber)) return;
+
+    const today = getCurrentCalendarDay() || 0;
+
+    if (today < dayNumber) return;
+
+    selectedDayNumber = dayNumber;
 
     dayNumberElement.textContent = dayNumber;
 
@@ -94,6 +130,8 @@ function openDay(dayNumber) {
         qrResult.hidden = true;
         qrResult.textContent = "";
     }
+
+    updateDayStatusUI(dayNumber);
 }
 
 
@@ -118,14 +156,6 @@ function initializeDayNavigation() {
             const dayNumber = Number(day.dataset.day);
 
             if (!dayNumber) return;
-
-            // Por ahora no abrimos los días bloqueados.
-            if (
-                day.classList.contains("is-locked") &&
-                !day.classList.contains("is-today")
-            ) {
-                return;
-            }
 
             openDay(dayNumber);
         });
@@ -224,29 +254,97 @@ async function openScanner() {
 
 
 // Cuando se detecta un QR
+
 function handleQrDetected(qrValue) {
-    const dayScreen = document.querySelector(".screen-day");
     const scannerScreen = document.querySelector(".screen-scanner");
+    const dayScreen = document.querySelector(".screen-day");
     const result = document.getElementById("qr-result");
 
-    if (!dayScreen || !scannerScreen || !result) {
-        console.error("No se han encontrado los elementos para mostrar el QR.");
-        return;
-    }
+    if (!scannerScreen || !dayScreen || !result) return;
 
     scannerScreen.hidden = true;
     dayScreen.hidden = false;
 
-    result.textContent = "Código detectado: " + qrValue;
-    result.hidden = false;
+    const expectedCode = `codigo_pista_dia_${selectedDayNumber}`;
+
+    // El código no coincide.
+    if (qrValue !== expectedCode) {
+        result.textContent =
+            "Este código QR no corresponde a este día. ¡Inténtalo de nuevo!";
+        result.hidden = false;
+        return;
+    }
+
+    // Registrar el escaneo correcto.
+    const registered = registrarDiaEscaneado(selectedDayNumber);
+
+    if (!registered) {
+        result.textContent = "No se ha podido validar este código.";
+        result.hidden = false;
+        return;
+    }
+
+    // Actualizar la pantalla y el calendario.
+    updateDayStatusUI(selectedDayNumber);
+    markCurrentCalendarDay();
+
+    console.log("Estado actualizado:", getEstadoDia());
 }
+
 
 
 // Cerrar el escáner manualmente
 async function closeScanner() {
-
     await stopQrScanner();
 
-    document.querySelector(".screen-scanner").hidden = true;
-    document.querySelector(".screen-day").hidden = false;
+    const scannerScreen = document.querySelector(".screen-scanner");
+    const dayScreen = document.querySelector(".screen-day");
+
+    if (scannerScreen) scannerScreen.hidden = true;
+    if (dayScreen) dayScreen.hidden = false;
+}
+
+
+function updateDayStatusUI(dayNumber) {
+    const scanButton = document.getElementById("scan-button");
+    const qrResult = document.getElementById("qr-result");
+    const clueContainer = document.querySelector(".clue-image");
+    const clueTitle = document.querySelector(".clue-title");
+
+    if (!scanButton || !qrResult) return;
+
+    qrResult.hidden = false;
+
+    // Día 25: regalo especial.
+    if (dayNumber === 25) {
+        scanButton.hidden = true;
+        if (clueContainer) clueContainer.hidden = true;
+        if (clueTitle) clueTitle.hidden = true;
+
+        qrResult.textContent =
+            "Para conseguir tu regalo, me tienes que ver ❤️";
+        return;
+    }
+
+    if (clueContainer) clueContainer.hidden = false;
+    if (clueTitle) clueTitle.hidden = false;
+
+    // Día completado.
+    if (isDiaCompletado(dayNumber)) {
+        scanButton.hidden = true;
+        qrResult.textContent = "¡Este día ya está completado! ❤️";
+        return;
+    }
+
+    // QR escaneado, pendiente de la pregunta.
+    if (isDiaEscaneado(dayNumber)) {
+        scanButton.hidden = true;
+        qrResult.textContent = "¡Ya has escaneado tu caja! ✓";
+        return;
+    }
+
+    // Todavía no ha escaneado.
+    scanButton.hidden = false;
+    qrResult.hidden = true;
+    qrResult.textContent = "";
 }
