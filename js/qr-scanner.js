@@ -17,9 +17,9 @@ async function startQrScanner(onDetected) {
             { facingMode: "environment" },
             {
                 fps: 10,
-                qrbox: {
-                    width: 220,
-                    height: 220
+                qrbox: (viewfinderWidth, viewfinderHeight) => {
+                    const size = Math.min(viewfinderWidth, viewfinderHeight) * 0.9;
+                    return { width: size, height: size };
                 },
                 aspectRatio: 1
             },
