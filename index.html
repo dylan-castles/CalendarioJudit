@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nuestro Adviento ❤️</title>
+    <meta name="theme-color" content="#F8E9EF">
+    <meta name="description" content="Nuestro calendario de Adviento">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/screens.css">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <script src="js/config.js" defer></script>
+    <script src="js/date-manager.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+
+<body>
+
+    <main class="app-container">
+
+        <section class="screen screen-before-start">
+
+            <div class="top-decoration" aria-hidden="true">
+                <span>✦</span>
+                <span>❄</span>
+                <span>✧</span>
+            </div>
+
+            <header class="before-header">
+
+                <div class="before-decoration">
+                    <span>🎀</span>
+                    <span>♡</span>
+                    <span>🎄</span>
+                </div>
+
+                <p class="eyebrow">ALGO BONITO ESTÁ POR LLEGAR</p>
+
+                <h1>¡Ya casi es<br>Navidad!</h1>
+
+                <div class="title-divider">
+                    <span>✧</span>
+                    <span>♡</span>
+                    <span>✧</span>
+                </div>
+
+                <p class="before-description">
+                    He preparado algo muy especial para ti.
+                    Pero todavía tendrás que esperar un poquito...
+                </p>
+
+            </header>
+
+            <!-- Ilustración central -->
+            <div class="christmas-illustration">
+
+                <div class="illustration-snow snow-one">❄</div>
+                <div class="illustration-snow snow-two">✧</div>
+                <div class="illustration-snow snow-three">❄</div>
+
+                <div class="christmas-gift">🎁</div>
+
+                <div class="illustration-caption">
+                    Una sorpresa te está esperando...
+                </div>
+
+            </div>
+
+            <!-- Cuenta atrás -->
+            <section class="countdown-section">
+
+                <p class="countdown-title">
+                    La magia comienza en...
+                </p>
+
+                <div class="countdown-grid">
+
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="countdown-days">--</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="countdown-hours">--</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="countdown-minutes">--</span>
+                        <span class="countdown-label">Minutos</span>
+                    </div>
+
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="countdown-seconds">--</span>
+                        <span class="countdown-label">Segundos</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Mensaje inferior -->
+            <footer class="before-footer">
+                <p>La espera merecerá la pena...</p>
+                <span>Preparado con mucho amor ❤️</span>
+            </footer>
+
+        </section>
+
+        <section class="screen screen-calendar">
+
+            <!-- Decoración superior -->
+            <div class="top-decoration" aria-hidden="true">
+                <span>✦</span>
+                <span>❄</span>
+                <span>✧</span>
+            </div>
+
+            <!-- Botón tutorial -->
+            <button class="tutorial-button"
+                    aria-label="Cómo jugar"
+                    title="Cómo jugar">
+                ?
+            </button>
+
+            <!-- Cabecera -->
+            <header class="calendar-header">
+
+                <div class="header-decoration">
+                    <span>🎀</span>
+                    <span class="header-heart">♥</span>
+                    <span>🎄</span>
+                </div>
+
+                <p class="eyebrow">DICIEMBRE 2026</p>
+
+                <h1>Calendario<br>Adviento</h1>
+
+                <div class="title-divider">
+                    <span>✧</span>
+                    <span>♡</span>
+                    <span>✧</span>
+                </div>
+
+                <p class="header-description">
+                    24 pequeños regalos y una sorpresa especial.
+                </p>
+
+            </header>
+
+            <!-- Progreso -->
+            <section class="progress-section">
+
+                <div class="progress-info">
+                    <span>Regalos conseguidos</span>
+                    <span class="progress-count">0 / 24 ❤️</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+
+            </section>
+
+            <!-- Calendario -->
+            <section class="calendar-section">
+
+                <div class="section-heading">
+                    <span class="heading-decoration">❄</span>
+                    <h2>Abre la magia</h2>
+                    <span class="heading-decoration">❄</span>
+                </div>
+
+                <div class="calendar-grid">
+
+                    <div class="calendar-day is-available" data-day="1">
+                        <span class="day-number">1</span>
+                        <span class="gift-icon">🎁</span>
+                        <span class="day-status">¡Vamos!</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="2">
+                        <span class="day-number">2</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="3">
+                        <span class="day-number">3</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="4">
+                        <span class="day-number">4</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="5">
+                        <span class="day-number">5</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="6">
+                        <span class="day-number">6</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="7">
+                        <span class="day-number">7</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="8">
+                        <span class="day-number">8</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="9">
+                        <span class="day-number">9</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="10">
+                        <span class="day-number">10</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="11">
+                        <span class="day-number">11</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="12">
+                        <span class="day-number">12</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="13">
+                        <span class="day-number">13</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="14">
+                        <span class="day-number">14</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="15">
+                        <span class="day-number">15</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="16">
+                        <span class="day-number">16</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="17">
+                        <span class="day-number">17</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="18">
+                        <span class="day-number">18</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="19">
+                        <span class="day-number">19</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="20">
+                        <span class="day-number">20</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="21">
+                        <span class="day-number">21</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="22">
+                        <span class="day-number">22</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="23">
+                        <span class="day-number">23</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-locked" data-day="24">
+                        <span class="day-number">24</span>
+                        <span class="gift-icon">🎁</span>
+                    </div>
+
+                    <div class="calendar-day is-special is-locked" data-day="25">
+                        <span class="day-number">25</span>
+                        <span class="gift-icon">💝</span>
+                        <span class="day-status">Especial</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Leyenda -->
+            <section class="calendar-legend">
+
+                <div class="legend-item">
+                    <span class="legend-dot available-dot"></span>
+                    <span>Disponible</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot locked-dot"></span>
+                    <span>Bloqueado</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot completed-dot"></span>
+                    <span>Completado</span>
+                </div>
+
+            </section>
+
+            <!-- Mensaje inferior -->
+            <footer class="calendar-footer">
+                <div class="footer-decoration">❄　♡　❄</div>
+                <span>Feliz Navidad ❤️</span>
+            </footer>
+
+        </section>
+
+        <section class="screen screen-day" hidden>
+
+            <!-- Decoración superior -->
+            <div class="top-decoration" aria-hidden="true">
+                <span>✦</span>
+                <span>❄</span>
+                <span>♡</span>
+                <span>✧</span>
+            </div>
+
+            <!-- Botón de ayuda -->
+            <button class="tutorial-button" type="button">
+                ?
+            </button>
+
+            <!-- Cabecera -->
+            <header class="day-header">
+                <div class="header-icons" aria-hidden="true">
+                    <span>🎀</span>
+                    <span>♥</span>
+                    <span>🎄</span>
+                </div>
+
+                <p class="eyebrow">CALENDARIO ADVIENTO</p>
+
+                <h1>
+                    Día <span id="selected-day-number">1</span>
+                </h1>
+
+                <div class="header-divider">
+                    <span></span>
+                    ♥
+                    <span></span>
+                </div>
+
+                <p class="day-description">
+                    Una nueva sorpresa te está esperando.
+                </p>
+            </header>
+
+            <!-- Contenido central -->
+            <div class="day-content">
+                <p class="clue-title">Pista:</p>
+
+                <div class="clue-image">
+                    <img id="clue-image" src="" alt="Pista del día">
+                </div>
+
+                <button class="scan-button" type="button">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z"
+                            fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linejoin="round"/>
+                        <path d="M5.5 5.5h2v2h-2z M16.5 5.5h2v2h-2z M5.5 16.5h2v2h-2z"
+                            fill="currentColor"/>
+                        <path d="M14 14h3v3h-3z M19 14v2h2 M19 19h2v2 M14 19v2"
+                            fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                    Escanear QR
+                </button>
+            </div>
+
+            <!-- Botón para volver -->
+            <button class="back-button" id="back-to-calendar"
+                    type="button" aria-label="Volver al calendario">
+                ←
+            </button>
+
+            <footer class="day-footer">
+                <p>Preparado con mucho amor ❤️</p>
+            </footer>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

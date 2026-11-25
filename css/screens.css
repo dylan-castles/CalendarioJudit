@@ -1,0 +1,773 @@
+
+/* ==================================
+   PANTALLA PRINCIPAL
+================================== */
+
+.screen-calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 0;
+}
+
+/* ==================================
+   DECORACION SUPERIOR
+================================== */
+
+.top-decoration {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0 12px;
+
+    color: var(--color-gold);
+    opacity: 0.7;
+    font-size: 19px;
+
+    pointer-events: none;
+}
+
+/* ==================================
+   CABECERA
+================================== */
+
+.calendar-header {
+    position: relative;
+    text-align: center;
+
+    padding: 12px 35px 0;
+    margin-bottom: 12px;
+
+    flex-shrink: 1;
+}
+
+.header-decoration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+    margin-bottom: 5px;
+    font-size: 22px;
+}
+
+.header-heart {
+    color: var(--color-pink-dark);
+    font-size: 17px;
+}
+
+.eyebrow {
+    color: var(--color-pink-dark);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 4px;
+
+    margin-bottom: 7px;
+}
+
+.calendar-header h1 {
+    font-size: clamp(30px, 9vw, 43px);
+    color: var(--color-primary-dark);
+    text-shadow: 1px 2px 0 #E9AFC240;
+}
+
+.title-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    margin: 7px 0;
+
+    color: var(--color-gold);
+    font-size: 16px;
+}
+
+.header-description {
+    color: var(--color-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ==================================
+   PROGRESO
+================================== */
+
+.progress-section {
+    background: #FFFFFFB8;
+    border: 1px solid #F0DCE3;
+    border-radius: 14px;
+
+    padding: 11px 14px;
+    margin-bottom: 15px;
+
+    flex-shrink: 0;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-bottom: 7px;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.progress-count {
+    color: var(--color-pink-dark);
+}
+
+.progress-caption {
+    margin-top: 6px;
+
+    text-align: center;
+    font-size: 11px;
+    font-style: italic;
+    color: var(--color-muted);
+}
+
+/* ==================================
+   CALENDARIO
+================================== */
+
+.calendar-section {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-bottom: 12px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 12px;
+
+    flex-shrink: 0;
+}
+
+.section-heading h2 {
+    font-size: 20px;
+}
+
+.heading-decoration {
+    color: var(--color-gold);
+    font-size: 17px;
+}
+
+/* ==================================
+   REJILLA
+================================== */
+
+.calendar-grid {
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+
+    gap: clamp(5px, 1.8vw, 10px);
+
+    flex: 1;
+    min-height: 0;
+}
+
+/* ==================================
+   CASILLAS
+================================== */
+
+.calendar-day {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        #FFFFFF,
+        #FFF7F9
+    );
+
+    border: 1px solid #EEDCE1;
+    border-radius: 13px;
+
+    color: var(--color-primary-dark);
+
+    box-shadow: 0 3px 7px #49383D0C;
+}
+
+.day-number {
+    font-family: Arial, sans-serif;
+    font-size: clamp(15px, 4.5vw, 21px);
+    font-weight: bold;
+}
+
+.gift-icon {
+    font-size: clamp(13px, 4vw, 19px);
+    line-height: 1.2;
+}
+
+.day-status {
+    font-family: Arial, sans-serif;
+    font-size: clamp(7px, 2vw, 9px);
+    font-weight: bold;
+}
+
+/* ==================================
+   ESTADOS
+================================== */
+
+.calendar-day.is-available {
+    background: linear-gradient(
+        145deg,
+        #FBE4EC,
+        #F5CBD9
+    );
+
+    border: 2px solid var(--color-pink-dark);
+    color: #873E5A;
+
+    box-shadow: 0 4px 12px #CE829F30;
+}
+
+.calendar-day.is-locked {
+    background: linear-gradient(
+        145deg,
+        #F6F3F2,
+        #EDE8E8
+    );
+
+    border: 1px solid #E5DDDE;
+    color: #AAA0A2;
+}
+
+.calendar-day.is-locked .gift-icon {
+    opacity: 0.55;
+}
+
+.calendar-day.is-completed {
+    background: linear-gradient(
+        145deg,
+        #E6F1E9,
+        #D3E8D9
+    );
+
+    border: 1px solid #8CB99A;
+    color: #326847;
+}
+
+/* ==================================
+   DIA ESPECIAL
+================================== */
+
+.calendar-day.is-special {
+    background: linear-gradient(
+        145deg,
+        #F9E8C9,
+        #F0D7A6
+    );
+
+    border: 2px solid var(--color-gold);
+    color: #805C24;
+}
+
+.calendar-day.is-special .gift-icon {
+    font-size: clamp(15px, 4.5vw, 21px);
+}
+
+/* ==================================
+   LEYENDA
+================================== */
+
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+
+    margin-top: 5px;
+    margin-bottom: 7px;
+
+    flex-shrink: 0;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+
+    color: var(--color-muted);
+}
+
+/* ==================================
+   PIE
+================================== */
+
+.calendar-footer {
+    text-align: center;
+    color: var(--color-muted);
+
+    padding-bottom: 3px;
+    flex-shrink: 0;
+}
+
+.footer-decoration {
+    margin-bottom: 2px;
+    color: var(--color-gold);
+    font-size: 15px;
+}
+
+.calendar-footer p {
+    font-size: 11px;
+    font-style: italic;
+}
+
+.calendar-footer span {
+    display: block;
+    margin-top: 2px;
+
+    color: var(--color-pink-dark);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* ==================================
+   MOVILES BAJITOS
+================================== */
+
+@media (max-height: 700px) {
+
+    .calendar-header {
+        padding-top: 5px;
+        margin-bottom: 7px;
+    }
+
+    .header-decoration {
+        font-size: 17px;
+        margin-bottom: 2px;
+    }
+
+    .calendar-header h1 {
+        font-size: 30px;
+    }
+
+    .title-divider {
+        margin: 3px 0;
+    }
+
+    .header-description {
+        font-size: 11px;
+    }
+
+    .progress-section {
+        padding: 8px 12px;
+        margin-bottom: 8px;
+    }
+
+    .progress-caption {
+        display: none;
+    }
+
+    .section-heading {
+        margin-bottom: 7px;
+    }
+
+    .calendar-legend {
+        margin-top: 3px;
+        margin-bottom: 4px;
+    }
+
+    .footer-decoration {
+        display: none;
+    }
+}
+
+/* ==================================
+   PANTALLAS MUY PEQUEÑAS
+================================== */
+
+@media (max-width: 360px) {
+
+    .app-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .calendar-grid {
+        gap: 5px;
+    }
+
+    .calendar-day {
+        border-radius: 10px;
+    }
+
+    .calendar-legend {
+        gap: 9px;
+    }
+}
+
+
+/* ==================================
+   PANTALLA ANTES DE DICIEMBRE
+================================== */
+
+.screen-before-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    text-align: center;
+    padding: 12px 8px 8px;
+}
+
+/* CABECERA */
+
+.before-header {
+    position: relative;
+    padding: 10px 18px 0;
+}
+
+.before-decoration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+    margin-bottom: 12px;
+    font-size: 25px;
+
+    color: var(--color-pink-dark);
+}
+
+.before-header h1 {
+    font-size: clamp(34px, 10vw, 46px);
+    font-weight: normal;
+    line-height: 1.08;
+}
+
+.before-description {
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 8px;
+}
+
+/* ILUSTRACIÓN */
+
+.christmas-illustration {
+    position: relative;
+
+    width: 100%;
+    min-height: 145px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        145deg,
+        #FBE9EF,
+        #F5D8E2
+    );
+
+    border: 1px solid #EBC6D3;
+    border-radius: 24px;
+
+    box-shadow: 0 5px 18px #CE829F18;
+}
+
+.christmas-gift {
+    font-size: clamp(65px, 18vw, 90px);
+    line-height: 1.2;
+}
+
+.illustration-caption {
+    color: #A45D77;
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.illustration-snow {
+    position: absolute;
+    color: var(--color-gold);
+    font-size: 22px;
+}
+
+.snow-one {
+    top: 15px;
+    left: 18%;
+}
+
+.snow-two {
+    top: 25px;
+    right: 20%;
+}
+
+.snow-three {
+    bottom: 20px;
+    right: 12%;
+}
+
+/* CUENTA ATRÁS */
+
+.countdown-section {
+    padding: 16px 10px;
+
+    background: #FFFFFFB8;
+    border: 1px solid #F0DCE3;
+    border-radius: 18px;
+}
+
+.countdown-title {
+    color: var(--color-primary);
+    font-size: 15px;
+    margin-bottom: 13px;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 9px 3px;
+
+    background: #FBEAF0;
+    border: 1px solid #F0D1DD;
+    border-radius: 12px;
+}
+
+.countdown-number {
+    color: var(--color-primary-dark);
+    font-family: Arial, sans-serif;
+    font-size: clamp(20px, 6vw, 28px);
+    font-weight: bold;
+}
+
+.countdown-label {
+    color: var(--color-pink-dark);
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* PIE */
+
+.before-footer {
+    padding: 5px 0 8px;
+}
+
+.before-footer p {
+    color: var(--color-muted);
+    font-size: 13px;
+    font-style: italic;
+}
+
+.before-footer span {
+    display: block;
+    margin-top: 5px;
+
+    color: var(--color-pink-dark);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* MOVILES BAJITOS */
+
+@media (max-height: 700px) {
+
+    .before-header {
+        padding-top: 2px;
+    }
+
+    .before-decoration {
+        font-size: 19px;
+        margin-bottom: 5px;
+    }
+
+    .before-header h1 {
+        font-size: 34px;
+    }
+
+    .before-description {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .christmas-illustration {
+        min-height: 110px;
+    }
+
+    .christmas-gift {
+        font-size: 65px;
+    }
+
+    .countdown-section {
+        padding: 10px;
+    }
+
+    .countdown-item {
+        padding: 6px 3px;
+    }
+}
+
+
+/* Día actual del calendario */
+.calendar-day.is-today {
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(196, 154, 80, 0.20);
+    position: relative;
+    z-index: 2;
+}
+
+
+
+/* =================================
+   PANTALLA DE UN DÍA
+================================= */
+
+.screen-day {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 12px;
+    position: relative;
+}
+
+/* Cabecera */
+
+.day-header {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.day-header h1 {
+    font-size: clamp(34px, 9vw, 46px);
+    color: var(--color-primary);
+    margin: 8px 0;
+    font-weight: normal;
+}
+
+.day-description {
+    color: var(--color-muted);
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+/* Contenido central */
+
+.day-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    gap: 14px;
+}
+
+.day-illustration {
+    width: clamp(110px, 30vw, 150px);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-pink-light);
+    border: 2px solid var(--color-pink);
+    border-radius: 50%;
+    box-shadow: 0 5px 18px rgba(206, 130, 159, 0.15);
+}
+
+.day-illustration span {
+    font-size: clamp(55px, 15vw, 75px);
+}
+
+.day-message {
+    color: var(--color-primary);
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.day-submessage {
+    color: var(--color-muted);
+    font-size: 14px;
+    max-width: 260px;
+    line-height: 1.5;
+}
+
+/* Pie y botón */
+
+.day-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.day-footer p {
+    color: var(--color-muted);
+    font-size: 12px;
+}
+
+/* Pantallas de poca altura */
+
+@media (max-height: 700px) {
+    .screen-day {
+        padding-top: 20px;
+    }
+
+    .day-header {
+        margin-top: 5px;
+    }
+
+    .day-content {
+        gap: 9px;
+    }
+
+    .day-illustration {
+        width: 105px;
+    }
+
+    .day-message {
+        font-size: 19px;
+    }
+}

@@ -1,0 +1,113 @@
+
+/* ==================================
+   PALETA DE COLORES
+================================== */
+
+:root {
+    --color-primary: #245442;
+    --color-primary-dark: #173D32;
+
+    --color-pink: #E9AFC2;
+    --color-pink-dark: #CE829F;
+    --color-pink-light: #F8E4EB;
+
+    --color-red: #B84C59;
+    --color-gold: #C49A50;
+
+    --color-background: #FFF8F5;
+    --color-surface: #FFFFFF;
+
+    --color-text: #49383D;
+    --color-muted: #947D83;
+
+    --color-border: #EEDCE1;
+
+    --border-radius: 16px;
+}
+
+/* ==================================
+   RESET
+================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    font-family: Georgia, "Times New Roman", serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.4;
+
+    background-image:
+        radial-gradient(circle at 10% 15%, #F8E4EB 0, transparent 25%),
+        radial-gradient(circle at 90% 75%, #E7EFE8 0, transparent 28%);
+}
+
+/* ==================================
+   CONTENEDOR PRINCIPAL
+================================== */
+
+.app-container {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    padding:
+        max(12px, env(safe-area-inset-top))
+        16px
+        max(12px, env(safe-area-inset-bottom));
+}
+
+.screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* ==================================
+   TITULOS
+================================== */
+
+h1,
+h2 {
+    color: var(--color-primary-dark);
+}
+
+h1 {
+    font-size: 43px;
+    line-height: 1.05;
+    font-weight: normal;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 21px;
+    font-weight: normal;
+}
+
+::selection {
+    background-color: var(--color-pink);
+    color: var(--color-primary-dark);
+}
+
+[hidden] {
+    display: none !important;
+}
