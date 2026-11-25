@@ -86,6 +86,14 @@ function openDay(dayNumber) {
 
     calendarScreen.hidden = true;
     dayScreen.hidden = false;
+
+    // Ocultar el resultado de un escaneo anterior
+    const qrResult = document.getElementById("qr-result");
+
+    if (qrResult) {
+        qrResult.hidden = true;
+        qrResult.textContent = "";
+    }
 }
 
 
@@ -128,6 +136,17 @@ function initializeDayNavigation() {
 
     if (backButton) {
         backButton.addEventListener("click", returnToCalendar);
+    }
+
+    const scanButton = document.getElementById("scan-button");
+    const closeScannerButton = document.getElementById("close-scanner");
+
+    if (scanButton) {
+        scanButton.addEventListener("click", openScanner);
+    }
+
+    if (closeScannerButton) {
+        closeScannerButton.addEventListener("click", closeScanner);
     }
 }
 
@@ -180,3 +199,54 @@ function initializeApp() {
 
 document.addEventListener("DOMContentLoaded", initializeApp);
 
+// Abrir la pantalla del escáner
+async function openScanner() {
+    const dayScreen = document.querySelector(".screen-day");
+    const scannerScreen = document.querySelector(".screen-scanner");
+    const message = document.getElementById("scanner-message");
+
+    if (!dayScreen || !scannerScreen || !message) {
+        console.error("No se han encontrado los elementos del escáner.");
+        return;
+    }
+
+    dayScreen.hidden = true;
+    scannerScreen.hidden = false;
+
+    message.textContent = "Preparando la cámara...";
+
+    try {
+        await startQrScanner(handleQrDetected);
+    } catch (error) {
+        console.error("No se pudo iniciar el escáner:", error);
+    }
+}
+
+
+// Cuando se detecta un QR
+function handleQrDetected(qrValue) {
+    const dayScreen = document.querySelector(".screen-day");
+    const scannerScreen = document.querySelector(".screen-scanner");
+    const result = document.getElementById("qr-result");
+
+    if (!dayScreen || !scannerScreen || !result) {
+        console.error("No se han encontrado los elementos para mostrar el QR.");
+        return;
+    }
+
+    scannerScreen.hidden = true;
+    dayScreen.hidden = false;
+
+    result.textContent = "Código detectado: " + qrValue;
+    result.hidden = false;
+}
+
+
+// Cerrar el escáner manualmente
+async function closeScanner() {
+
+    await stopQrScanner();
+
+    document.querySelector(".screen-scanner").hidden = true;
+    document.querySelector(".screen-day").hidden = false;
+}

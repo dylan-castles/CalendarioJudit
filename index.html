@@ -16,9 +16,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <script src="js/config.js" defer></script>
-    <script src="js/date-manager.js" defer></script>
-    <script src="js/app.js" defer></script>
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/date-manager.js"></script>
+    <script src="js/calendar-manager.js"></script>
+    <script src="js/qr-scanner.js"></script>
+    <script src="js/app.js"></script>
 </head>
 
 <body>
@@ -386,7 +390,7 @@
                     <img id="clue-image" src="" alt="Pista del día">
                 </div>
 
-                <button class="scan-button" type="button">
+                <button class="scan-button" type="button" id="scan-button">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z"
                             fill="none" stroke="currentColor"
@@ -399,6 +403,8 @@
                     </svg>
                     Escanear QR
                 </button>
+
+                <p id="qr-result" class="qr-result" hidden></p>
             </div>
 
             <!-- Botón para volver -->
@@ -410,6 +416,36 @@
             <footer class="day-footer">
                 <p>Preparado con mucho amor ❤️</p>
             </footer>
+
+        </section>
+
+        <section class="screen screen-scanner" hidden>
+
+            <header class="scanner-header">
+                <p class="eyebrow">NUESTRO ADVIENTO</p>
+                <h1>Escanea tu sorpresa</h1>
+                <p>Coloca el código QR dentro del cuadrado.</p>
+            </header>
+
+            <div class="scanner-content">
+
+                <div class="scanner-frame">
+                    <div id="qr-reader"></div>
+                </div>
+
+                <p id="scanner-message">
+                    Preparando la cámara...
+                </p>
+
+            </div>
+
+            <button
+                class="back-button"
+                id="close-scanner"
+                type="button"
+                aria-label="Cerrar escáner">
+                ←
+            </button>
 
         </section>
 

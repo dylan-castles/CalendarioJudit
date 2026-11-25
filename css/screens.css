@@ -771,3 +771,12 @@
         font-size: 19px;
     }
 }
+
+/* PANTALLA DEL ESCÁNER */
+.screen-scanner {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px 0 12px;
+    gap: 10px;
+}
