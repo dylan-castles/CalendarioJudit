@@ -282,3 +282,8 @@
     font-size: 0.9rem;
     overflow-wrap: anywhere;
 }
+
+#qr-reader__scan_region > img,
+#qr-reader__scan_region > svg {
+    display: none !important;
+}
